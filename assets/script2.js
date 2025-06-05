@@ -93,6 +93,20 @@ function startCarouselNavigation(tableau) {
     showSlide(currentIndex);
   }
 
+let autoSlide;
+function startAutoSlide() {
+  autoSlide = setInterval(() => {
+    nextSlide();
+  }, 5000);
+}
+function stopAutoSlide() {
+  clearInterval(autoSlide);
+}
+startAutoSlide();
+const banner = document.querySelector('#banner');
+banner.addEventListener('mouseenter', stopAutoSlide);
+banner.addEventListener('mouseleave', startAutoSlide);
+
   document.querySelector('#left').addEventListener('click', prevSlide);
   document.querySelector('#right').addEventListener('click', nextSlide);
 
