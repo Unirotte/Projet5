@@ -1,56 +1,107 @@
 
-const left = document.querySelector('#left');
-const right = document.querySelector('#right');
+
 const slider = document.querySelector('.banner-slide');
 const images = document.querySelectorAll('.banner-img');
 const nbImg = images.length;
-const dots = document.querySelectorAll('.dot');
+let title, subtitle;
 
-const texte = [
-    { titre: "Impressions tous formats", sousTitre: "en boutique et en ligne" },
-    { titre: "Tirages haute définition grand format", sousTitre: "pour vos bureaux et events" },
-    { titre: "Grand choix de couleurs", sousTitre: "de CMJN aux pantones" },
-    { titre: "Autocollants", sousTitre: "avec découpe laser sur mesure" }
-];
 
-const textePrincipal = document.querySelector('.arrow p');
-const texteSecondaire = document.querySelector('.arrow p span');
+async function Carrousel() {
+  try {
+    const response = await fetch('tableau.json');
+    if (!response.ok) throw new Error('Erreur de chargement du fichier JSON');
 
-let i = 0;
-let intervalId;
+    const tableau = await response.json();
+    console.log(tableau);
 
-function showImage(index) {
-    images.forEach((img, j) => {
-        img.classList.toggle('active', j === index);
+    const slider = document.querySelector('.banner-slide');
+    const dotsContainer = document.querySelector('.dots');
+    const banner = document.querySelector('#banner');
+
+    slider.innerHTML = '';
+    dotsContainer.innerHTML = '';
+
+    const titleBox = document.createElement('div');
+    titleBox.classList.add('banner-text');
+
+    title = document.createElement('h2');
+    title.classList.add('banner-title');
+
+    subtitle = document.createElement('span');
+    subtitle.classList.add('banner-subtitle');
+
+    title.appendChild(subtitle);
+    titleBox.appendChild(title);
+    banner.appendChild(titleBox);
+
+
+    tableau.forEach((item, index) => {
+      const slide = document.createElement('div');
+      slide.classList.add('slide');
+      if (index !== 0) slide.style.display = 'none';
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.alt;
+      img.classList.add('banner-img');
+
+      slide.appendChild(img);
+      slider.appendChild(slide);
     });
 
-  
-    updateDots(index);
-    updateTexte(index);
+    tableau.forEach((item, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('dot_selected');
+      dotsContainer.appendChild(dot);
+    });
+
+    startCarouselNavigation(tableau);
+  } catch (error) {
+    console.error('Erreur:', error);
+  }
 }
 
-right.addEventListener('click', () => {
-    i = (i + 1) % nbImg;
-    showImage(i);
-});
+document.addEventListener('DOMContentLoaded', Carrousel);
 
-left.addEventListener('click', () => {
-    i = (i - 1 + nbImg) % nbImg;
-    showImage(i);
-});
+function startCarouselNavigation(tableau) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
 
+  let currentIndex = 0;
 
-function updateDots(index) {
+  function showSlide(index) {
+    title.textContent = tableau[index].titre;
+    subtitle.textContent = tableau[index].sousTitre;
+    title.appendChild(subtitle);
+
+    slides.forEach((slide, i) => {
+      slide.style.display = (i === index) ? 'flex' : 'none';
+    });
     dots.forEach((dot, i) => {
-        dot.classList.toggle('dot_selected', i === index);
+      dot.classList.toggle('dot_selected', i === index);
     });
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  document.querySelector('#left').addEventListener('click', prevSlide);
+  document.querySelector('#right').addEventListener('click', nextSlide);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      showSlide(currentIndex);
+    });
+  });
+
+  showSlide(currentIndex);
 }
-
-function updateTexte(index) {
-    textePrincipal.firstChild.textContent = texte[index].titre + ' ';
-    texteSecondaire.textContent = texte[index].sousTitre;
-}
-
-showImage(i); 
-
-

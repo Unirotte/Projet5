@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "titre": "Impressions tous formats",
+    "sousTitre": "en boutique et en ligne",
+    "image": "./assets/images/slideshow/slide1.jpg",
+    "alt": "Imprimante qui imprime une feuille rapidement ce qui la rend floue"
+  },
+  {
+    "id": 2,
+    "titre": "Tirages haute définition grand format",
+    "sousTitre": "pour vos bureaux et events",
+    "image": "./assets/images/slideshow/slide2.jpg",
+    "alt": "Un open space avec des personnes qui travaillent sur des ordinateurs, avec des affiches imprimées en arrière-plan"
+  },
+  {
+    "id": 3,
+    "titre": "Grand choix de couleurs",
+    "sousTitre": "de CMJN aux pantones",
+    "image": "./assets/images/slideshow/slide3.jpg",
+    "alt": "Une tablette graphique avec des couleurs CMJN et Pantone affichées à l'écran"
+  },
+  {
+    "id": 4,
+    "titre": "Autocollants",
+    "sousTitre": "avec découpe laser sur mesure",
+    "image": "./assets/images/slideshow/slide4.png",
+    "alt": "Un fond jaune avec des autocollants de différentes formes et tailles, découpés avec précision"
+  }
+]

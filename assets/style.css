@@ -235,29 +235,15 @@ input#search {
 	flex-direction: row;
 	align-items: center;
 	width: 100%;
-	min-height: 470px;
 	position: relative;
 	overflow: hidden
 }
 
-.banner-img {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	opacity: 0;
-	transition: opacity 0.5s ease;
-	z-index: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
+.slide {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-
-.banner-img.active {
-	opacity: 1;
-	z-index: 1;
-}
-
 
 
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
@@ -274,11 +260,13 @@ input#search {
 #banner .arrow_left {
 	left: 10px;
 	cursor: pointer;
+	position: relative;
 }
 
 #banner .arrow_right {
 	right: 10px;
 	cursor: pointer;
+	position: relative;
 }
 
 /* Gestion des points du carrousel */
@@ -306,8 +294,9 @@ input#search {
 	background-color: #fff;
 }
 
+
 /* Fin du code CSS pour le carousel */
-#banner p {
+/* #banner p {
 	font-family: 'Roboto Slab', sans-serif;
 	font-weight: 900;
 	font-size: 50px;
@@ -321,7 +310,7 @@ input#search {
 	display: block;
 	font-weight: 400;
 	font-size: 30px;
-}
+} */
 
 #about-us {
 	display: flex;
@@ -474,4 +463,38 @@ footer div {
 	#contact>article {
 		flex: 2;
 	}
+}
+
+/*NEW*/
+
+.banner-slide {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+img.banner-img {
+	width: 100%;
+}
+
+span.banner-subtitle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 25px;
+	font-weight: 100;
+}
+
+.banner-text {
+	position: absolute;
+	width: 100%;
+	color: white;
+
+}
+
+h2.banner-title {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 50px;
 }
