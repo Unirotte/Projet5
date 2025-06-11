@@ -4,6 +4,10 @@ const slider = document.querySelector('.banner-slide');
 const images = document.querySelectorAll('.banner-img');
 const nbImg = images.length;
 let title, subtitle;
+const dotsContainer = document.querySelector('.dots');
+const banner = document.querySelector('#banner');
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 
 
 async function Carrousel() {
@@ -13,10 +17,6 @@ async function Carrousel() {
 
     const tableau = await response.json();
     console.log(tableau);
-
-    const slider = document.querySelector('.banner-slide');
-    const dotsContainer = document.querySelector('.dots');
-    const banner = document.querySelector('#banner');
 
     slider.innerHTML = '';
     dotsContainer.innerHTML = '';
@@ -62,11 +62,8 @@ async function Carrousel() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', Carrousel);
-
 function startCarouselNavigation(tableau) {
   const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
 
   let currentIndex = 0;
 
@@ -93,19 +90,19 @@ function startCarouselNavigation(tableau) {
     showSlide(currentIndex);
   }
 
-let autoSlide;
-function startAutoSlide() {
-  autoSlide = setInterval(() => {
-    nextSlide();
-  }, 5000);
-}
-function stopAutoSlide() {
-  clearInterval(autoSlide);
-}
-startAutoSlide();
-const banner = document.querySelector('#banner');
-banner.addEventListener('mouseenter', stopAutoSlide);
-banner.addEventListener('mouseleave', startAutoSlide);
+  let autoSlide;
+  function startAutoSlide() {
+    autoSlide = setInterval(() => {
+      nextSlide();
+    }, 5000);
+  }
+  function stopAutoSlide() {
+    clearInterval(autoSlide);
+  }
+  startAutoSlide();
+  
+  banner.addEventListener('mouseenter', stopAutoSlide);
+  banner.addEventListener('mouseleave', startAutoSlide);
 
   document.querySelector('#left').addEventListener('click', prevSlide);
   document.querySelector('#right').addEventListener('click', nextSlide);
@@ -119,3 +116,4 @@ banner.addEventListener('mouseleave', startAutoSlide);
 
   showSlide(currentIndex);
 }
+Carrousel();
