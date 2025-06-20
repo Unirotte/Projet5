@@ -7,7 +7,6 @@ let title, subtitle;
 const dotsContainer = document.querySelector('.dots');
 const banner = document.querySelector('#banner');
 const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
 
 
 async function Carrousel() {
@@ -64,6 +63,7 @@ async function Carrousel() {
 
 function startCarouselNavigation(tableau) {
   const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 
   let currentIndex = 0;
 
